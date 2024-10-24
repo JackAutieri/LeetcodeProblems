@@ -1,0 +1,22 @@
+class Solution(object):
+    def longestCommonPrefix(self, strs):
+        """
+        :type strs: List[str]
+        :rtype: str
+        """
+        
+        strs.sort()
+
+        firstString = strs[0]
+        lastString = strs[-1]
+
+        firstLength = len(firstString)
+        lastLength = len(lastString)
+
+        i = 0
+
+        while (i < lastLength) and (i < firstLength) and (firstString[i] == lastString[i]):  
+            i += 1
+            
+
+        return firstString[:i]
