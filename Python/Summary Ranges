@@ -1,0 +1,32 @@
+# You are given a sorted unique integer array nums.
+# A range [a,b] is the set of all integers from a to b (inclusive).
+# Return the smallest sorted list of ranges that cover all the numbers in the array exactly. That is, each element of nums is covered by exactly one of the ranges, and there is no integer x such that x is in one of the ranges but not in nums.
+# Each range [a,b] in the list should be output as:
+
+# "a->b" if a != b
+# "a" if a == b
+ 
+class Solution:
+    def summaryRanges(self, nums: List[int]) -> List[str]:
+        res = []
+
+        if not nums:
+            return res
+        
+        i = 0
+        while i < len(nums):
+            j = i + 1
+
+            while j < len(nums) and nums[j] == nums[j - 1] + 1:
+                j += 1
+            
+            # If the range is a single number
+            if j - 1 == i:
+                res.append(str(nums[i]))
+            else:
+                # Otherwise, append the range
+                res.append(f"{nums[i]}->{nums[j-1]}")
+            
+            i = j
+
+        return res
