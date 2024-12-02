@@ -1,0 +1,62 @@
+# Given a sentence that consists of some words separated by a single space, and a searchWord, 
+# check if searchWord is a prefix of any word in sentence.
+
+# Return the index of the word in sentence (1-indexed) where searchWord is a prefix of this 
+# word. If searchWord is a prefix of more than one word, return the index of the first word 
+# (minimum index). If there is no such word return -1.
+
+# A prefix of a string s is any leading contiguous substring of s.
+
+
+# Solution (Optimal Solution)
+
+class Solution:
+    def isPrefixOfWord(self, sentence: str, searchWord: str) -> int:
+        words = sentence.split(" ")
+
+        # Iterate over the words while keeping track of the index
+        for i, word in enumerate(words):
+            # Check if the word starts with the searchWord
+            if word.startswith(searchWord):
+                return i+1 # Return the 0-based Index + 1 to get answer
+        
+        # If no word in sentence starting with searchWord Return -1
+        return -1
+
+
+
+# Solution 2 (List Comprehension Solution)
+
+class Solution:
+    def isPrefixOfWord(self, sentence: str, searchWord: str) -> int:
+
+        
+        try:
+            # List Comprehension to find index of word that starts with searchWord 
+            return ([i for i in range(len(sentence.split())) if sentence.split()[i][:len(searchWord)] == searchWord][0])+1
+
+        # Return Statement Above throws a IndexError for index out of bounds if list is empty
+        except (IndexError):
+            return -1 # Return -1 if no word in sentence that starts with searchWord
+
+
+
+# Solution 3 (Regular Expression Solution)
+
+import re
+
+class Solution:
+    def isPrefixOfWordRegex(self, sentence: str, searchWord: str) -> int:
+        # Create a regex pattern to match words starting with searchWord
+        pattern = rf"\b{re.escape(searchWord)}\w*"
+        
+        # Find all matches in the sentence
+        matches = re.finditer(pattern, sentence)
+        
+        # Iterate over matches to find the 1-based index of the first matching word
+        for i, match in enumerate(sentence.split(), start=1):
+            if match.startswith(searchWord):
+                return i
+        
+        # Return -1 if no match is found
+        return -1
