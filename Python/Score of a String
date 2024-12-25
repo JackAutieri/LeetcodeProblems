@@ -1,0 +1,15 @@
+class Solution(object):
+    def scoreOfString(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        # to increase run time declaring a variable for length of s to reference in for loop
+        sLength = len(s)
+
+        ans = 0
+        # looping through the length of the list to reference each character
+        for i in range(0, sLength-1):
+            ans += abs(ord(s[i]) - ord(s[i+1])) # Taking the absolute value of the difference of each character's ascii value and adding it to ans 
+
+        return ans
