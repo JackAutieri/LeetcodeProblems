@@ -1,0 +1,41 @@
+class Solution(object):
+    def myAtoi(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        
+        ans = ''
+        nums = ['1','2','3','4','5','6','7','8','9','0']
+
+        s = s.lstrip()  # Remove leading whitespaces
+        i = 0
+
+        if len(s) == 0:  # If string is empty after stripping whitespaces
+            return 0
+        
+        if s[0] == '-':  # Handle negative number
+            i = 1
+            ans = '-'
+        elif s[0] == '+':  # Handle positive number (optional as default is positive)
+            i = 1
+
+        sLen = len(s)
+        # Process the digits and build the number
+        while i < sLen and s[i] in nums:
+            ans += s[i]
+            i += 1
+            
+        if len(ans) == 0 or (len(ans) == 1 and ans == '-'):
+            return 0
+        
+        # Convert to integer
+        result = int(ans)
+
+        # Handle bounds based on the 32-bit signed integer range
+        if result < -2147483648:
+            return -2147483648
+        elif result > 2147483647:
+            return 2147483647
+        else:
+            return result
