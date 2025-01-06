@@ -1,0 +1,39 @@
+# Given the array nums consisting of 2n elements in the form [x1,x2,...,xn,y1,y2,...,yn].
+
+# Return the array in the form [x1,y1,x2,y2,...,xn,yn].
+
+# Solution 1 (Optimal)
+
+class Solution(object):
+    def shuffle(self, nums, n):
+        """
+        :type nums: List[int]
+        :type n: int
+        :rtype: List[int]
+        """
+
+        res = []
+
+        for i in range(n):
+            res.append(nums[i])
+            res.append(nums[i + n])
+        
+        return res
+
+# Solution 2 Splitting Array into 2 halves 
+
+class Solution(object):
+    def shuffle(self, nums, n):
+        """
+        :type nums: List[int]
+        :type n: int
+        :rtype: List[int]
+        """
+        y = nums[n:]
+        x = nums[:n]
+        res = []
+
+        for i in range(n):
+            res.append(x[i])
+            res.append(y[i])
+        
